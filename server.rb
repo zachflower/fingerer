@@ -6,36 +6,55 @@ server = TCPServer.new('0.0.0.0', 79)
 loop do
   Thread.start(server.accept) do |client|
     username = client.gets.strip
-    user = Octokit.user username
 
-    client.puts "+----------------------------------------------------------------------------+"
-    client.puts "|                                                                            |"
-    client.puts sprintf "| Login name: %-21s In real life: %-26s |", user.login, user.name
-    client.puts sprintf "| Profile type: %-19s Repositories: %-26d |", user.type, user.public_repos
-    client.puts sprintf "| Followers: %-22d Following: %-29d |", user.followers, user.following if user.type == 'User'
-
-    if user.location || user.email || user.blog
-      client.puts "|                                                                            |"
-      client.puts "+-[ Contact ]----------------------------------------------------------------+"
-      client.puts "|                                                                            |"
-
-      client.puts sprintf "| Location: %-64s |", user.location if user.location
-      client.puts sprintf "| Email: %-67s |", user.email if user.email
-      client.puts sprintf "| Website: %-65s |", user.blog if user.blog
+    if username.empty?
+      client.close
     end
 
-    client.puts "|                                                                            |"
+    begin
+      user = Octokit.user username
+    rescue
+      client.puts "#{username}: no such user"
+      client.close
+    end
 
-    # word-wrap source: https://www.ruby-forum.com/topic/57805#46993
+    client.puts ""
+
+    if user.type == 'User'
+      client.puts "+-[ User ]-------------------------------------------------------------------+"
+    else
+      client.puts "+-[ Organization ]-----------------------------------------------------------+"
+    end
+
+    client.puts sprintf "| %-74.74s |", ""
+    client.puts sprintf "| %-36.36s %-37.37s |", "Username: #{user.login}", "Full Name: #{user.name}"
+
+    if user.blog || user.email
+      client.puts sprintf "| %-36.36s %-37.37s |", "Website: #{user.blog}", "Email: #{user.email}"
+    end
+
+    if user.location
+      client.puts sprintf "| %-74.74s |", "Location: #{user.location}"
+    end
+
+    client.puts sprintf "| %-74.74s |", ""
+
+    if user.type == 'User'
+      client.puts "+-[ Stats ]------------------------------------------------------------------+"
+      client.puts sprintf "| %-74.74s |", ""
+      client.puts sprintf "| %-24s %-24s %-24s |", "Followers: #{user.followers}", "Following: #{user.following}", "Repositories: #{user.public_repos}"
+      client.puts sprintf "| %-74.74s |", ""
+    end
+
     if user.bio
       client.puts "+-[ Biography ]--------------------------------------------------------------+"
-      client.puts "|                                                                            |"
+      client.puts sprintf "| %-74.74s |", ""
 
       user.bio.scan(/\S.{0,72}\S(?=\s|$)|\S+/).each do |line|
-        client.puts sprintf "| %-74s |", line
+        client.puts sprintf "| %-74.74s |", line
       end
 
-      client.puts "|                                                                            |"
+      client.puts sprintf "| %-74.74s |", ""
     end
 
     client.puts "+----------------------------------------------------------------------------+"

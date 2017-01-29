@@ -1,3 +1,4 @@
 source 'https://rubygems.org'
 
-gem "octokit", "~> 4.0"
+# Specify your gem's dependencies in fingerer.gemspec
+gemspec

@@ -6,7 +6,7 @@ require 'optparse'
 
 options = {}
 OptionParser.new do |opt|
-  opt.on('-d', '--daemonize', 'Run as a background process') { |o| options[:daemonize] = TRUE }
+  opt.on('-d', '--daemonize', 'Run as a background process') { options[:daemonize] = TRUE }
   opt.on('-p', '--port PORT', 'Port to run on (default: 79)') { |o| options[:port] = o }
   opt.on('-l', '--listen IP', 'IP to listen on (default: 0.0.0.0)') { |o| options[:listen] = o }
 end.parse!

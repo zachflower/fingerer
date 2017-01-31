@@ -43,15 +43,21 @@ Via Wikipedia:
 
 Add this line to your application's Gemfile:
 
-    gem 'fingerer'
+```
+gem 'fingerer'
+```
 
 And then execute:
 
-    $ bundle
+```
+bundle install
+```
 
 Or install it yourself as:
 
-    $ gem install fingerer
+```
+gem install fingerer
+```
 
 ## Usage
 

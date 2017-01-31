@@ -53,10 +53,14 @@ module Fingerer
     private_class_method def self.response(user)
       response = []
 
+      info = info(user)
+      stats = stats(user)
+      biography = biography(user)
+
       response << ""
-      response << info(user)
-      response << stats(user)
-      response << biography(user)
+      response << info unless info.empty?
+      response << stats unless stats.empty?
+      response << biography unless biography.empty?
       response << ""
       response << "Member since #{user.created_at.strftime("%c")}"
 

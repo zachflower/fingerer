@@ -5,6 +5,9 @@ module Fingerer
 
     def self.row(*cols)
       count = cols.count;
+
+      return "|#{" " * (@@_width + 2)}|" if count == 0
+
       width = ((@@_width - (count - 1)) / count).to_i
       remainder = (@@_width - ((width * count) + (count - 1))).to_i
       widths = Array.new(count, width)
@@ -17,7 +20,8 @@ module Fingerer
       sprintf("| #{widths.join(" ")} |", *cols)
     end
 
-    def self.header(title)
+    def self.header(title = "")
+      title = title[0..(@@_width - 5)]
       "+-[ #{title} ]#{"-" * (@@_width - (title.length + 3))}+"
     end
 

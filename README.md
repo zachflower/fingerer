@@ -1,6 +1,6 @@
 # Fingerer
 
-[![Code Climate](https://codeclimate.com/github/zachflower/fingerer/badges/gpa.svg)](https://codeclimate.com/github/zachflower/fingerer) [![Build Status](https://travis-ci.org/zachflower/fingerer.svg?branch=master)](https://travis-ci.org/zachflower/fingerer) [![Beerpay](https://beerpay.io/zachflower/fingerer/badge.svg?style=flat)](https://beerpay.io/zachflower/fingerer)
+[![Code Climate](https://codeclimate.com/github/zachflower/fingerer/badges/gpa.svg)](https://codeclimate.com/github/zachflower/fingerer) [![Build Status](https://travis-ci.org/zachflower/fingerer.svg?branch=master)](https://travis-ci.org/zachflower/fingerer) [![Gem Version](https://badge.fury.io/rb/fingerer.svg)](https://badge.fury.io/rb/fingerer) [![Beerpay](https://beerpay.io/zachflower/fingerer/badge.svg?style=flat)](https://beerpay.io/zachflower/fingerer)
 
 Fingerer is a [finger](https://en.wikipedia.org/wiki/Finger_protocol) server that returns the GitHub profile associated with the provided username. Quickly lookup GitHub user and organization information using a standard `finger` command.
 

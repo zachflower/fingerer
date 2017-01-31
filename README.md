@@ -1,5 +1,7 @@
 # Fingerer
 
+[![Code Climate](https://codeclimate.com/github/zachflower/fingerer/badges/gpa.svg)](https://codeclimate.com/github/zachflower/fingerer)
+
 Fingerer is a [finger](https://en.wikipedia.org/wiki/Finger_protocol) server that returns the GitHub profile associated with the provided username. Quickly lookup GitHub user and organization information using a standard `finger` command.
 
 **Syntax**

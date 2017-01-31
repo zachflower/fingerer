@@ -24,7 +24,7 @@ module Fingerer
         Thread.start(server.accept) do |client|
           # start timer
           start_time = Time.now
-          sock_domain, remote_port, remote_hostname, remote_ip = client.peeraddr
+          remote_ip = client.peeraddr[-1]
           username = client.gets.strip
 
           Debug.info("Started request for \"#{username}\" from #{remote_ip}")

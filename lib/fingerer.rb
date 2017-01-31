@@ -9,15 +9,15 @@ require "fingerer/time"
 module Fingerer
   class Server
 
-    def self.start
-      ip = '0.0.0.0'
-      port = 79
+    def self.start(options = {})
+      options[:listen] ||= '0.0.0.0'
+      options[:port] ||= 79
 
       Debug.info("Booting Fingerer")
 
-      server = ::TCPServer.new(ip, port)
+      server = ::TCPServer.new(options[:listen], options[:port])
 
-      Debug.info("Listening on tcp://#{ip}:#{port}");
+      Debug.info("Listening on tcp://#{options[:listen]}:#{options[:port]}");
       Debug.info("Ctrl-C to shutdown server\n");
 
       loop do

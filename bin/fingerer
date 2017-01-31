@@ -1,5 +1,16 @@
 #!/usr/bin/env ruby
 
+require 'daemons'
 require 'fingerer'
+require 'optparse'
 
-Fingerer::Server.start
+options = {}
+OptionParser.new do |opt|
+  opt.on('-d', '--daemonize', 'Run as a background process') { |o| options[:daemonize] = TRUE }
+  opt.on('-p', '--port PORT', 'Port to run on (default: 79)') { |o| options[:port] = o }
+  opt.on('-l', '--listen IP', 'IP to listen on (default: 0.0.0.0)') { |o| options[:listen] = o }
+end.parse!
+
+Daemons.daemonize(:app_name => 'fingerer') if options[:daemonize]
+
+Fingerer::Server.start(options)

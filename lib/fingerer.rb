@@ -32,41 +32,7 @@ module Fingerer
           begin
             user = ::Octokit.user(username)
 
-            client.puts("")
-
-            if user.type == 'User'
-              client.puts(Table.header("User"))
-            else
-              client.puts(Table.header("Organization"))
-            end
-
-            client.puts(Table.row(""))
-            client.puts(Table.row("Username: #{user.login}", "Full Name: #{user.name}"))
-            client.puts(Table.row("Website: #{user.blog}", "Email: #{user.email}")) if user.blog || user.email
-            client.puts(Table.row("Location: #{user.location}")) if user.location
-            client.puts(Table.row(""))
-
-            if user.type == 'User'
-              client.puts(Table.header("Stats"))
-              client.puts(Table.row(""))
-              client.puts(Table.row("Followers: #{user.followers}", "Following: #{user.following}", "Repositories: #{user.public_repos}"))
-              client.puts(Table.row(""))
-            end
-
-            if user.bio
-              client.puts(Table.header("Biography"))
-              client.puts(Table.row(""))
-
-              user.bio.scan(/\S.{0,72}\S(?=\s|$)|\S+/).each do |line|
-                client.puts(Table.row(line))
-              end
-
-              client.puts(Table.row(""))
-            end
-
-            client.puts(Table.line)
-            client.puts("")
-            client.puts("Member since #{user.created_at.strftime("%c")}")
+            client.puts(response(user))
           rescue Octokit::NotFound
             client.puts("No such user \"#{username}\"")
           rescue => e
@@ -82,6 +48,70 @@ module Fingerer
           Debug.info("Completed request for \"#{username}\" from #{remote_ip} in #{(end_time.to_ms - start_time.to_ms)}ms")
         end
       end
+    end
+
+    private_class_method def self.response(user)
+      response = []
+
+      response << ""
+      response << info(user)
+      response << stats(user)
+      response << biography(user)
+      response << ""
+      response << "Member since #{user.created_at.strftime("%c")}"
+
+      response.join("\n")
+    end
+
+    private_class_method def self.info(user)
+      response = []
+
+      if user.type == 'User'
+        response << Table.header("User")
+      else
+        response << Table.header("Organization")
+      end
+
+      response << Table.row("")
+      response << Table.row("Username: #{user.login}", "Full Name: #{user.name}")
+      response << Table.row("Website: #{user.blog}", "Email: #{user.email}") if user.blog || user.email
+      response << Table.row("Location: #{user.location}") if user.location
+      response << Table.row("")
+
+      response.join("\n")
+      response
+    end
+
+    private_class_method def self.stats(user)
+      response = []
+
+      if user.type == 'User'
+        response << Table.header("Stats")
+        response << Table.row("")
+        response << Table.row("Followers: #{user.followers}", "Following: #{user.following}", "Repositories: #{user.public_repos}")
+        response << Table.row("")
+      end
+
+      response.join("\n")
+    end
+
+    private_class_method def self.biography(user)
+      response = []
+
+      if user.bio
+        response << Table.header("Biography")
+        response << Table.row("")
+
+        user.bio.scan(/\S.{0,72}\S(?=\s|$)|\S+/).each do |line|
+          response << Table.row(line)
+        end
+
+        response << Table.row("")
+      end
+
+      response << Table.line
+
+      response.join("\n")
     end
   end
 end

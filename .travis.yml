@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+  - ruby-head
+  - ruby
+  - 2.4.0
+  - 2.3.0
+  - 2.2.0
+  - 2.1.0
+  - 2.0.0
+  - 1.9.3
+  - jruby-head
+  - jruby
+  - jruby-19mode
+  - rbx-head
+  - rbx-2

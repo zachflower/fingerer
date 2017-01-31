@@ -55,7 +55,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+Usage: fingerer [options]
+    -d, --daemonize                  Run as a background process
+    -p, --port PORT                  Port to run on (default: 79)
+    -l, --listen IP                  IP to listen on (default: 0.0.0.0)
+```
+
+**Note: Fingerer must be run as root, as fingerd is expected to be listening on port 79.**
 
 ## Contributing
 

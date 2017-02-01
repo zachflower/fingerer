@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Fingerer::VERSION
   spec.authors       = ["Zachary Flower"]
   spec.email         = ["zach@zacharyflower.com"]
-  spec.description   = %q{Fingerer is a finger server that returns the GitHub profile associated with the provided username. Quickly lookup GitHub user and organization information using a standard finger command.}
+  spec.description   = %q{Finger(er) is a finger server that returns the GitHub profile associated with the provided username. Quickly lookup GitHub user and organization information using a standard finger command.}
   spec.summary       = %q{Lookup GitHub profile information using a standard finger command.}
   spec.homepage      = "https://github.com/zachflower/fingerer"
   spec.license       = "MIT"

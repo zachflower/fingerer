@@ -1,8 +1,8 @@
-# Fingerer
+# Finger(er)
 
 [![Code Climate](https://codeclimate.com/github/zachflower/fingerer/badges/gpa.svg)](https://codeclimate.com/github/zachflower/fingerer) [![Build Status](https://travis-ci.org/zachflower/fingerer.svg?branch=master)](https://travis-ci.org/zachflower/fingerer) [![Gem Version](https://badge.fury.io/rb/fingerer.svg)](https://badge.fury.io/rb/fingerer) [![Beerpay](https://beerpay.io/zachflower/fingerer/badge.svg?style=flat)](https://beerpay.io/zachflower/fingerer)
 
-Fingerer is a [finger](https://en.wikipedia.org/wiki/Finger_protocol) server that returns the GitHub profile associated with the provided username. Quickly lookup GitHub user and organization information using a standard `finger` command.
+Finger(er) is a [finger](https://en.wikipedia.org/wiki/Finger_protocol) server that returns the GitHub profile associated with the provided username. Quickly lookup GitHub user and organization information using a standard `finger` command.
 
 **Syntax**
 
@@ -70,7 +70,7 @@ Usage: fingerer [options]
     -l, --listen IP                  IP to listen on (default: 0.0.0.0)
 ```
 
-**Note: Fingerer must be run as root, as fingerd is expected to be listening on port 79.**
+**Note: Finger(er) must be run as root, as fingerd is expected to be listening on port 79.**
 
 ## Contributing
 
